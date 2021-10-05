@@ -1,1 +1,11 @@
-back-end/node_modules
+# ignore all node_modules of both front-end and back-end
+*/node_modules
+
+# ignore .env file
+*/.env
+
+# ignore all .db file
+*/*.db
+
+
+.DS_Store
