@@ -2,11 +2,13 @@
 const express = require('express')
 const sqlite3 = require('sqlite3').verbose()
 const app = express()
+const cors = require('cors')
 
-app.use(express.json());
+app.use(express.json())
+app.use(cors())
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
+  require('dotenv').config()
 }
 
 const port = process.env.PORT || 5000
@@ -15,11 +17,11 @@ const dbPath = './duck.db'
 app.get('/', (req, res) => {
   let db = new sqlite3.Database(dbPath);
 
-  let sql = `SELECT * FROM feeding`;
+  let sql = `SELECT * FROM feeding`
 
   db.all(sql, [], (err, rows) => {
     if (err) {
-      throw err;
+      throw err
     }
     res.send(rows)
   });
@@ -29,8 +31,8 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  let db = new sqlite3.Database(dbPath);
-  let sql = `SELECT * FROM feeding`;
+  let db = new sqlite3.Database(dbPath)
+  let sql = `SELECT * FROM feeding`
 
   console.log('req', req.body)
   res.send("received")
