@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
+import { Container, Box, TextField, Button, Alert, InputAdornment } from '@mui/material'
 
 import DateTimePicker from '@mui/lab/DateTimePicker'
-import InputAdornment from '@mui/material/InputAdornment'
 
 import DateAdapter from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
@@ -17,6 +13,7 @@ const Form = () => {
   const [location, setLocation] = useState('')
   const [numOfDuck, setNumOfDuck] = useState(0)
   const [foodWeight, setFoodWeight] = useState(0)
+  const [formStatus, setFormStatus] = useState()
 
   // handle saving changes based on target id
   const handleChange = (e) => {
@@ -41,21 +38,36 @@ const Form = () => {
   }
 
   const handleSubmit = async () => {
-    // if location include description, then assign to description foundLocation otherwise assign location
-    let foundLocation = location && location.description ? location.description : location
+    if (!location || isNaN(numOfDuck) || isNaN(foodWeight)) {
+      setFormStatus({ severity: "error", message: "Error. Missing information" })
+    } else {
+      setFormStatus()
 
-    // use ISO string to format datetime for storing purpose
-    let toISOString = new Date(datetime).toISOString()
+      // if location include description, then assign to description foundLocation otherwise assign location
+      let foundLocation = location && location.description ? location.description : location
 
-    const response = await fetch(process.env.REACT_APP_API_URL, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ datetime: toISOString, location: foundLocation, numOfDuck, foodWeight })
-    });
-    return response.json();
+      // use ISO string to format datetime for storing purpose
+      let toISOString = new Date(datetime).toISOString()
+
+      const response = await fetch(process.env.REACT_APP_API_URL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ datetime: toISOString, location: foundLocation, numOfDuck, foodWeight })
+      });
+
+      if (response.status === 200) {
+        setFormStatus({ severity: "success", message: "We have received the information" })
+
+        setNumOfDuck(0)
+        setFoodWeight(0)
+      } else {
+        setFormStatus({ severity: "error", message: "Error. Please try again" })
+      }
+    }
+
   }
 
   return <Container maxWidth="sm">
@@ -84,6 +96,7 @@ const Form = () => {
       />
 
       <TextField
+        value={numOfDuck}
         type="number"
         helperText="Please enter the number of ducks fed"
         label="Number of ducks"
@@ -93,6 +106,7 @@ const Form = () => {
       />
 
       <TextField
+        value={foodWeight}
         type="number"
         helperText="Please enter how much food the ducks are fed"
         label="Quantity"
@@ -102,10 +116,11 @@ const Form = () => {
         id="foodWeight"
         onChange={(e) => { handleChange(e) }}
       />
+      {formStatus && <Alert severity={formStatus.severity}>{formStatus.message}</Alert>}
       <Button variant="contained" onClick={handleSubmit}>Submit</Button>
 
     </Box >
-  </Container>
+  </Container >
 
 }
 
