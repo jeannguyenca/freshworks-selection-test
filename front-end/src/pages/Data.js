@@ -9,18 +9,20 @@ import Paper from '@mui/material/Paper';
 
 const Data = () => {
   const [rows, setRows] = useState([])
+
+  // fetch data at loading
   useEffect(() => {
-    (async () => {
-      fetch(process.env.REACT_APP_API_URL).then(res => res.json()).then(json => {
+    fetch(process.env.REACT_APP_API_URL)
+      .then(res => res.json())
+      .then(json => {
         console.log(json)
         setRows(json)
       })
-    })()
-
   }, [])
 
   return <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      {/* --------- Table heading ----------- */}
       <TableHead>
         <TableRow>
           <TableCell>id</TableCell>
@@ -31,6 +33,7 @@ const Data = () => {
         </TableRow>
       </TableHead>
       <TableBody>
+        {/* --------- Table content --------- */}
         {rows.map((row) => (
           <TableRow
             key={row.id}
