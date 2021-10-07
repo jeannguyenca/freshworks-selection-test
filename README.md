@@ -7,8 +7,8 @@ cd front-end
 yarn install
 ```
 - Create .env file including:
-  - REACT_APP_GOOGLE
-  - REACT_APP_API_URL
+  - REACT_APP_GOOGLE: Google API key
+  - REACT_APP_API_URL: Backend URL
 
 - Run the front-end application:
 ```
@@ -21,8 +21,8 @@ yarn start
 cd back-end
 npm install
 ```
-- Create .env file including
-  - PORT
+- Create .env file including:
+  - PORT: Local port to run the app
 - Populate the database
 ```
 node databaseInit.js
