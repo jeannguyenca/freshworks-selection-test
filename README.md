@@ -1,7 +1,7 @@
 # How to run the application
 
 ## Front-end
-- Install required packages
+- Install required packages:
 ```
 cd front-end
 yarn install
@@ -16,14 +16,15 @@ yarn start
 ```
 
 ## Back-end
-- Install required packages
+- Install required packages:
 ```
 cd back-end
 npm install
 ```
 - Create .env file including:
   - PORT: Local port to run the app
-- Populate the database
+  
+- Populate the database:
 ```
 node databaseInit.js
 ```
