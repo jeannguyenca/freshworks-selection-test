@@ -32,10 +32,19 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   let db = new sqlite3.Database(dbPath)
-  let sql = `SELECT * FROM feeding`
 
-  console.log('req', req.body)
-  res.send("received")
+  const { datetime, location, numOfDuck, foodWeight } = req.body
+
+  db.run(`INSERT INTO feeding (time, location, quantity, quality) VALUES(datetime(?), ?, ?, ?)`, [datetime, location, numOfDuck, foodWeight], function (err) {
+    if (err) {
+      return console.log(err.message);
+    }
+    // get the last insert id
+    console.log(`A row has been inserted with rowid ${this.lastID}`);
+
+    res.status(200).send({ status: "success" })
+  });
+
 
 })
 
