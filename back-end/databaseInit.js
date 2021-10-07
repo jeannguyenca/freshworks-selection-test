@@ -11,7 +11,8 @@ db.serialize(() => {
     [quantity]  INTEGER,
     [quality]   INTEGER)`);
   db.run(`INSERT INTO feeding (time, location, quantity, quality) VALUES 
-    ("1", "Test", 1, 1)`);
+    (datetime("2021-10-07 03:42:11"), "Stanley Park, Vancouver, BC, Canada", 100, 10),
+    (datetime("2021-10-07 01:42:11"), "Queen Elizabeth Park, Cambie Street, Vancouver, BC, Canada", 92, 5)`);
 });
 
 db.close((err) => {
