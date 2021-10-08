@@ -4,7 +4,9 @@
   "description": "NodeJS and MySQL back-end application",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "dev": "nodemon index.js",
+    "build": "node databaseInit.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jean Nguyen",
