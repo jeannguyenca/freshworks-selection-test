@@ -13,6 +13,10 @@ import Form from './pages/Form'
 import Data from './pages/Data'
 
 // Use to pass NavLink component to Link component
+/**
+ * @param  {} props Component props
+ * @param  {} ref   Component ref
+ */
 const LinkBehavior = React.forwardRef((props, ref) => (
   <NavLink ref={ref} {...props} activeStyle={{
     fontWeight: "bold",

@@ -39,8 +39,6 @@ app.post('/', (req, res) => {
     if (err) {
       return console.log(err.message);
     }
-    // get the last insert id
-    console.log(`A row has been inserted with rowid ${this.lastID}`);
 
     res.status(200).send({ status: "success" })
   });

@@ -7,7 +7,9 @@ import DateAdapter from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 
 import MaterialUIGooglePlaces from '../components/MaterialUIGooglePlaces'
-
+/**
+ * Component for duck feeding form
+ */
 const Form = () => {
   const [datetime, setDatetime] = useState(new Date())
   const [location, setLocation] = useState('')
@@ -16,6 +18,9 @@ const Form = () => {
   const [formStatus, setFormStatus] = useState()
 
   // handle saving changes based on target id
+  /**
+   * @param  {Event} e Event object
+   */
   const handleChange = (e) => {
     switch (e.target.id) {
       case 'numOfDuck':

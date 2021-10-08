@@ -6,7 +6,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+/**
+ * Component showing all submitted data
+ */
 const Data = () => {
   const [rows, setRows] = useState([])
 
@@ -15,7 +17,6 @@ const Data = () => {
     fetch(process.env.REACT_APP_API_URL)
       .then(res => res.json())
       .then(json => {
-        console.log(json)
         setRows(json)
       })
   }, [])
